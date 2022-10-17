@@ -1,0 +1,23 @@
+#buttoni {
+    position: absolute;
+    left: 700px;
+    top: 300px;
+  }
+#canvas {
+    background-image: url("./images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-color: #cccccc;
+   }
+
+#buttonbeast{
+  position: absolute;
+  left: 600px;
+  top: 300px;
+}
+#buttonchill{
+  position: absolute;
+  left: 800px;
+  top: 300px;
+}
+
