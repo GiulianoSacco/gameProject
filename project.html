@@ -6,16 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="project.css" type="text/css" />
     <title>Project</title>
-  </head>
+  </head id = "body">
   <body>
-    <div id="buttoni">
-      <button onclick="purrbaddie()">Arriba, arriba!</button>
+    <img id =title src="./images/LIFE OF BIRDIE.png" alt="unknown">
+    <img id ="instructions1" src="./images/this.png" alt="Spacebar">
+    <div id = "instructions1text">
+      <p>Make Birdie get past the obstacles using spacebar</p>
     </div>
-    <div id="buttonbeast">
-      <button onclick="beast()">Beast Mode</button>
+    <img id ="instructions2" src="./images/2081763-200.png" alt="arrows">
+    <div id = "instructions2text">
+      <p>Give Birdie his food of the day using the left and right arrows</p>
     </div>
-    <div id="buttonchill">
-      <button onclick="chill()">Chill Mode</button>
+    <div id = "instructions2text2">
+      <p>BE CAREFUL WITH THE WEAPONS</p>
+    </div>
+    <div >
+      <button id="buttoni" onclick="purrbaddie()">START</button>
+    </div>
+    <div >
+      <button id="buttonbeast" onclick="beast()">Beast Mode</button>
+    </div>
+    <div >
+      <button id="buttonchill" onclick="chill()">Chill Mode</button>
     </div>
     <canvas id = "canvas" width="100vw" height="100vh"></canvas>
     <script type="text/javascript" src="project.js"></script>
