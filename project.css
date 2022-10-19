@@ -8,14 +8,16 @@ body{
     position: absolute;
     left: 680px;
     top: 240px;
-    background-color: #40a278; /* Green */
+    background-color: #c8c453;
     border-radius: 60px;
-    height: 150px;
-    width: 150px;
-    color: rgb(27, 75, 31);
+    height: 130px;
+    width: 130px;
+    color: rgb(155, 140, 4);
     font-size: 30px;
     font-family: "Courier New", monospace;
     font-weight: bold;
+    box-shadow: 0px 0px 7px 7px rgb(155, 140, 4);
+    border: none
   }
 #canvas {
     position: absolute;
@@ -32,28 +34,32 @@ body{
   position: absolute;
   left: 520px;
   top: 270px;
-  background-color: #40a278; /* Green */
+  background-color:  #c8c453;
   border-radius: 60px;
   height: 150px;
   width: 150px;
-  color: rgb(27, 75, 31);
+  color: rgb(155, 140, 4);
   font-size: 30px;
   font-family: "Courier New", monospace;
   font-weight: bold;
+  box-shadow: 0px 0px 7px 7px rgb(155, 140, 4);
+  border: none
 }
 #buttonchill{
   z-index: 10;
   position: absolute;
-  left: 840px;
+  left: 880px;
   top: 270px;
-  background-color: #40a278; /* Green */
+  background-color: #c8c453;
   border-radius: 60px;
   height: 150px;
   width: 150px;
-  color: rgb(27, 75, 31);
+  color: rgb(155, 140, 4);
   font-size: 30px;
   font-family: "Courier New", monospace;
   font-weight: bold;
+  box-shadow: 0px 0px 7px 7px rgb(155, 140, 4);
+  border: none
 }
 
 #instructions1{
@@ -69,7 +75,7 @@ body{
   z-index: 10;
   position: absolute;
   left: 160px;
-  top: 360px;
+  top: 380px;
   font-size: 20px;
   font-family: "Courier New", monospace;
   width: 300px;
@@ -85,7 +91,7 @@ body{
 #instructions2{
   z-index: 10;
   position: absolute;
-  left: 1150px;
+  left: 1130px;
   top: 200px;
   width: 200px;
   height: 200px;
@@ -94,10 +100,11 @@ body{
 #instructions2text{
   z-index: 10;
   position: absolute;
-  left: 1050px;
+  left: 1100px;
   top: 380px;
   font-size: 20px;
   font-family: "Courier New", monospace;
+  width: 300px;
   font-weight: bold;
   
 }
@@ -105,9 +112,28 @@ body{
 #instructions2text2{
   z-index: 10;
   position: absolute;
-  left: 1050px;
-  top: 430px;
+  left: 1100px;
+  top: 450px;
   font-size: 25px;
   font-family: "Courier New", monospace;
+  width: 300px;
   font-weight: bold;
 }
+
+#reset {
+  z-index: 10;
+  position: absolute;
+  left: 680px;
+  top: 300px;
+  background-color: #c8c453;
+  border-radius: 80px;
+  height: 150px;
+  width: 150px;
+  color: rgb(155, 140, 4);
+  font-size: 30px;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  box-shadow: 0px 0px 7px 7px rgb(155, 140, 4);
+  border: none
+}
+

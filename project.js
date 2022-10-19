@@ -6,7 +6,10 @@ const ctx = canvas.getContext('2d');
 const obstacles1 = []
 const obstacles2 = []
 const obstacles3 = []
-const collitions = []
+const obstacles4 = []
+const obstacles5 = []
+const obstacles6 = []
+const obstacles7 = []
 let gameStatus = "gameOn"
 let score = 0
 document.getElementById('buttonbeast').style.visibility='hidden'
@@ -17,6 +20,9 @@ document.getElementById("title").style.visibility="visible"
 document.getElementById("instructions2").style.visibility="hidden"
 document.getElementById("instructions2text").style.visibility="hidden"
 document.getElementById("instructions2text2").style.visibility="hidden"
+document.getElementById("reset").style.visibility="hidden"
+
+
 //const darkbackground = new Image();
 //background.src = "./images/575ef1223c95837f7d17973d3217d61d.png"
 
@@ -24,14 +30,26 @@ const bird1 = new Image();
 bird1.src = "images/realbird.png";
 //const bird1 = new Image();
 //background.src = "./images/bird1.jpg";
-const smoke1 = new Image();
-smoke1.src = "images/smoke.png";
+const enemy1 = new Image();
+enemy1.src = "images/enemy.png";
+
+const enemy2 = new Image();
+enemy2.src = "images/enemy.png";
+
+const enemy3 = new Image();
+enemy3.src = "images/enemy.png";
 
 const food1 = new Image();
-food1.src = "images/food.png";
+food1.src = "images/fries.png";
 
-const hammer1 = new Image();
-hammer1.src = "images/hammer.png";
+const fruit1 = new Image();
+fruit1.src = "images/apple.png";
+
+const fruit2 = new Image();
+fruit2.src = "images/strawberry.png";
+
+const fruit3 = new Image();
+fruit3.src = "images/pineapple.png"
 
 const finishBad = new Image();
 finishBad.src = "images/GAME OVER.png";
@@ -45,7 +63,7 @@ class  Person{
       this.y = y,
       this.w = 120,
       this.h = 120,
-      this.speedJump = 100
+      this.speedJump = 75
       this.gravity = gravity
       this.color = "blue"
       this.difficulty = difficulty
@@ -60,7 +78,7 @@ class  Person{
         }
     }
     moveDown(){
-        if(this.y < canvas.height*0.7 - this.h -1 && this.difficulty === "hard"){
+        if(this.y < canvas.height - this.h -1 && this.difficulty === "hard"){
         this.y += this.gravity
         }
     }
@@ -126,53 +144,42 @@ class Obstacles {
     }
 
     contains(b){
-      return (this.x < b.x + b.w) &&
-        (this.x + this.w > b.x) &&
-        (this.y < b.y + b.h) &&
-        (this.y + this.h > b.y)
+      return (this.x + 30 < b.x + b.w) &&
+        (this.x + this.w > b.x + 30) &&
+        (this.y + 30 < b.y + b.h) &&
+        (this.y + this.h > b.y + 30)
     }
   }
   
   let time = 1500
   
-  setInterval(() => {
-      const obstacle1 = new Obstacles(canvas.width, Math.floor(Math.random() * (canvas.height*0.4)), Math.floor(Math.random() * 200) + 100, 50,"blue", "hard", smoke1)
-      obstacles1.push(obstacle1)
-  },(time))
-
-  setInterval(() => {
-    const obstacle2 = new Obstacles( Math.floor(Math.random() * (canvas.width)), 0, 160, 160,"blue", "easy", food1)
-    obstacles2.push(obstacle2)
-  },(time))
-  
-  setInterval(() => {
-    const obstacle3 = new Obstacles( Math.floor(Math.random() * (canvas.width)), 0, 60, 60,"red", "easy", hammer1)
-    obstacles3.push(obstacle3)
-  },(time))
-
   const checkCollitions = (obs, pers) => {
     return obs.contains(pers)
   }
 
   const drawScore = () => {
     ctx.fillStyle = "brown"
-    ctx.font = "30px sans-serif"
-    ctx.fillText(Math.floor(Math.round(score)), (canvas.width - 120) , 60)
+    ctx.font = "30px Courier New"
+    let data = `SCORE: ${Math.floor(Math.round(score))}`
+    ctx.fillText(data, (canvas.width - 200) , 60)
   }
 
   const drawGameOver = () => {
     ctx.clearRect(0,0,canvas.width, canvas.height)
-    // background.onload = function(){
-    //   ctx.drawImage(background,0,0,canvas.width,canvas.height);   
-    //  }
-    ctx.drawImage(finishBad,(canvas.width/2)-580, (canvas.height/2)-100)
-    drawScore()
+    document.getElementById("canvas").style = "./images/background.jpg"
+    ctx.drawImage(finishBad,(canvas.width/2)-580, (canvas.height/2)-250)
+    document.getElementById("reset").style.visibility="visible"
+
   }
 
   const happyTime = () => {
-    ctx.drawImage(finishGood,10, (canvas.height/2)-100, 1500, 200)
-    drawScore()
+    ctx.clearRect(0,0,canvas.width, canvas.height)
+    document.getElementById("canvas").style = "./images/background.jpg)"
+    ctx.drawImage(finishGood,10, (canvas.height/2)-270, 1500, 200)
+    document.getElementById("reset").style.visibility="visible"
   }
+
+
 
   function update() {
     ctx.clearRect(0,0,canvas.width, canvas.height)
@@ -183,6 +190,8 @@ class Obstacles {
     score++
     if (gameStatus === "finished") {
       drawGameOver()
+      ctx.font = "bold 40px Courier New";
+      ctx.fillText(`SCORE:${score}`, ((canvas.width / 2)+305), 280);
       return
       
     }
@@ -196,12 +205,32 @@ class Obstacles {
         }
       }
     })
+    obstacles5.forEach(obstacle5 => {
+      if (obstacle5.x > 0) {
+        obstacle5.drawDown()
+        if (checkCollitions(obstacle5, newPers)) {
+          gameStatus = "finished"
+        }
+      }
+    })
+    obstacles6.forEach(obstacle6 => {
+      if (obstacle6.x > 0) {
+        obstacle6.drawDown()
+        if (checkCollitions(obstacle6, newPers)) {
+          gameStatus = "finished"
+        }
+      }
+    })
     requestAnimationFrame(update)
   }
 
+  function resetgame(){
+    window.location.reload()
 
+  }
   
   function purrbaddie() {
+  ctx.clearRect(0,0,canvas.width, canvas.height)
   document.getElementById('buttoni').style.visibility='hidden'
   document.getElementById('buttonbeast').style.visibility='visible'
   document.getElementById('buttonchill').style.visibility='visible'
@@ -210,10 +239,13 @@ class Obstacles {
   document.getElementById("instructions2").style.visibility="visible"
   document.getElementById("instructions2text").style.visibility="visible"
   document.getElementById("instructions2text2").style.visibility="visible"
+  
 
   }
 
   function beast() {
+  ctx.clearRect(0,0,canvas.width, canvas.height)
+  document.getElementById("canvas").style = "./images/wp8483094.jpg"
   document.getElementById('buttonbeast').style.visibility='hidden'
   document.getElementById('buttonchill').style.visibility='hidden'
   document.getElementById("title").style.visibility="hidden"
@@ -222,7 +254,22 @@ class Obstacles {
   document.getElementById("instructions2").style.visibility="hidden"
   document.getElementById("instructions2text").style.visibility="hidden"
   document.getElementById("instructions2text2").style.visibility="hidden"
-  document.addEventListener("keydown", (spacebar) => {
+  setInterval(() => {
+    const obstacle1 = new Obstacles(canvas.width, Math.floor(Math.random() * (canvas.height - 70)), 70, 70,"blue", "hard", enemy1)
+    obstacles1.push(obstacle1)
+  },(3000))
+
+  setInterval(() => {
+    const obstacle5 = new Obstacles(canvas.width, Math.floor(Math.random() * (canvas.height - 70)), 70, 70,"blue", "hard", enemy2)
+    obstacles5.push(obstacle5)
+  },(6000))
+
+  setInterval(() => {
+    const obstacle6 = new Obstacles(canvas.width, Math.floor(Math.random() * (canvas.height - 70)), 70, 70,"blue", "hard", enemy3)
+    obstacles6.push(obstacle6)
+  },(1000))
+
+    document.addEventListener("keydown", (spacebar) => {
     
       if(spacebar.keyCode === 32){
         newPers.moveUp()
@@ -236,40 +283,73 @@ class Obstacles {
   function chillmode() {
     ctx.clearRect(0,0,canvas.width, canvas.height)
     drawScore()
-    
-    if(oldPers.h >= 1500){
+    if(score >= 500){
       happyTime()
       return
      }
+     
     oldPers.draw()
     obstacles2.forEach(obstacle2 => {
+      if (obstacle2.y < canvas.height*0.68) {
         obstacle2.drawLeft()
-
+      
       if (checkCollitions(obstacle2, oldPers)) {
-        oldPers.h += 0.3
-        oldPers.w += 0.3
-        oldPers.y -= 0.3
-        score += 0.1
-      }
+        oldPers.h += 0.05
+        oldPers.w += 0.05
+        oldPers.y -= 0.05
+        score += 0.4
+      }}
     })
     obstacles3.forEach(obstacle3 => {
-      obstacle3.drawLeft()
+      if (obstacle3.y < canvas.height*0.68) {
+        obstacle3.drawLeft()
       
     if (checkCollitions(obstacle3, oldPers)) {
-      oldPers.h -= 0.7
-      oldPers.w -= 0.7
-      oldPers.y -= 0.7
-      score -= 1 
-    }
+      oldPers.h -= 0.01
+      oldPers.w -= 0.01
+      oldPers.y += 0.01
+      score -= 0.3
+    }}
   })
+
+    obstacles4.forEach(obstacle4 => {
+      if (obstacle4.y < canvas.height*0.68) {
+        obstacle4.drawLeft()
+      
+    if (checkCollitions(obstacle4, oldPers)) {
+      oldPers.h -= 0.01
+      oldPers.w -= 0.01
+      oldPers.y += 0.01
+      score -= 0.3
+    }}
+  })
+
+
+  obstacles5.forEach(obstacle5 => {
+    if (obstacle5.y < canvas.height - obstacles5.y - 1) {
+      obstacle5.drawLeft()
+    
+  if (checkCollitions(obstacle5, oldPers)) {
+    oldPers.h -= 0.01
+    oldPers.w -= 0.01
+    oldPers.y += 0.01
+    score -= 0.3
+  }}
+})
+
+
+
+
+
     if(score < 0){
       drawGameOver()
+      return
     }
     requestAnimationFrame(chillmode)
   }
   
   function chill() {
-    
+    ctx.clearRect(0,0,canvas.width, canvas.height)
     document.getElementById('buttonbeast').style.visibility='hidden'
     document.getElementById('buttonchill').style.visibility='hidden'
     document.getElementById("title").style.visibility="hidden"
@@ -280,6 +360,26 @@ class Obstacles {
     document.getElementById("instructions2").style.visibility="hidden"
     document.getElementById("instructions2text").style.visibility="hidden"
     document.getElementById("instructions2text2").style.visibility="hidden"
+    setInterval(() => {
+      const obstacle2 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 60, 60,"blue", "easy", food1)
+      obstacles2.push(obstacle2)
+    },(1500))
+    
+    setInterval(() => {
+      const obstacle3 = new Obstacles( Math.floor(Math.random() * (canvas.width -50)), 0, 80, 80,"red", "easy", fruit1)
+      obstacles3.push(obstacle3)
+    },(1700))
+
+    setInterval(() => {
+      const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 65, 65,"red", "easy", fruit2)
+      obstacles4.push(obstacle4)
+    },(1600))
+
+    setInterval(() => {
+      const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 65, 65,"red", "easy", fruit3)
+      obstacles4.push(obstacle4)
+    },(1400))
+
     document.addEventListener("keydown", (rightArrow) => {
       if(rightArrow.keyCode === 39){    
         oldPers.moveRight()
