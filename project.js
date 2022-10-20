@@ -46,16 +46,30 @@ const fruit1 = new Image();
 fruit1.src = "images/apple.png";
 
 const fruit2 = new Image();
-fruit2.src = "images/strawberry.png";
+fruit2.src = "images/water.png";
 
 const fruit3 = new Image();
-fruit3.src = "images/pineapple.png"
+fruit3.src = "images/cherry.png"
 
 const finishBad = new Image();
 finishBad.src = "images/GAME OVER.png";
 
 const finishGood = new Image();
 finishGood.src = "images/HAPPYENDING.png";
+
+const jump = new sound("sounds/jumpp.wav")
+
+const lose = new sound("sounds/lost.wav")
+
+const wrongfruit = new sound("sounds/wrong.wav")
+
+const winn = new sound("sounds/win.wav")
+
+const yum = new sound("sounds/good.wav")
+
+
+
+
 
 class  Person{
     constructor(x, y, difficulty, gravity){
@@ -75,10 +89,11 @@ class  Person{
     moveUp(){
         if(this.y > 1 && this.difficulty === "hard"){
         this.y -= this.speedJump
+        jump.play()
         }
     }
     moveDown(){
-        if(this.y < canvas.height - this.h -1 && this.difficulty === "hard"){
+        if(this.y < (canvas.height*0.65) && this.difficulty === "hard"){
         this.y += this.gravity
         }
     }
@@ -88,7 +103,7 @@ class  Person{
         }
     }
     moveRight(){
-      if(this.x < (canvas.width - 1) && this.difficulty === "easy"){
+      if(this.x < (canvas.width - this.w - 1) && this.difficulty === "easy"){
         this.x += this.speedJump
       }
     }
@@ -109,7 +124,7 @@ class Obstacles {
       this.y = y,
       this.h = h,
       this.w = w,
-      this.speed2 = 5,
+      this.speed2 = 10,
       this.color = color,
       this.difficulty = difficulty
       this.image = image
@@ -144,10 +159,10 @@ class Obstacles {
     }
 
     contains(b){
-      return (this.x + 30 < b.x + b.w) &&
-        (this.x + this.w > b.x + 30) &&
-        (this.y + 30 < b.y + b.h) &&
-        (this.y + this.h > b.y + 30)
+      return (this.x + 50 < b.x + b.w) &&
+        (this.x + this.w > b.x + 50) &&
+        (this.y + 50 < b.y + b.h) &&
+        (this.y + this.h > b.y + 50)
     }
   }
   
@@ -159,9 +174,8 @@ class Obstacles {
 
   const drawScore = () => {
     ctx.fillStyle = "brown"
-    ctx.font = "30px Courier New"
-    let data = `SCORE: ${Math.floor(Math.round(score))}`
-    ctx.fillText(data, (canvas.width - 200) , 60)
+    ctx.font = "bold 30px Courier New"
+    ctx.fillText(Math.floor(Math.round(score)), (canvas.width - 200) , 60)
   }
 
   const drawGameOver = () => {
@@ -191,7 +205,7 @@ class Obstacles {
     if (gameStatus === "finished") {
       drawGameOver()
       ctx.font = "bold 40px Courier New";
-      ctx.fillText(`SCORE:${score}`, ((canvas.width / 2)+305), 280);
+      ctx.fillText(`SCORE:${score}`, ((canvas.width / 2)+305), 300);
       return
       
     }
@@ -202,6 +216,7 @@ class Obstacles {
         obstacle1.drawDown()
         if (checkCollitions(obstacle1, newPers)) {
           gameStatus = "finished"
+          lose.play()
         }
       }
     })
@@ -210,6 +225,7 @@ class Obstacles {
         obstacle5.drawDown()
         if (checkCollitions(obstacle5, newPers)) {
           gameStatus = "finished"
+          lose.play()
         }
       }
     })
@@ -218,17 +234,33 @@ class Obstacles {
         obstacle6.drawDown()
         if (checkCollitions(obstacle6, newPers)) {
           gameStatus = "finished"
+          lose.play()
         }
       }
     })
     requestAnimationFrame(update)
   }
 
+  function sound (src){
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+    this.sound.play();
+    };
+    this.stop = function(){
+    this.sound.pause();
+    };
+    }
+
   function resetgame(){
     window.location.reload()
-
-  }
   
+  }
+
   function purrbaddie() {
   ctx.clearRect(0,0,canvas.width, canvas.height)
   document.getElementById('buttoni').style.visibility='hidden'
@@ -255,19 +287,34 @@ class Obstacles {
   document.getElementById("instructions2text").style.visibility="hidden"
   document.getElementById("instructions2text2").style.visibility="hidden"
   setInterval(() => {
-    const obstacle1 = new Obstacles(canvas.width, Math.floor(Math.random() * (canvas.height - 70)), 70, 70,"blue", "hard", enemy1)
+    const obstacle1 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy1)
     obstacles1.push(obstacle1)
   },(3000))
 
   setInterval(() => {
-    const obstacle5 = new Obstacles(canvas.width, Math.floor(Math.random() * (canvas.height - 70)), 70, 70,"blue", "hard", enemy2)
+    const obstacle5 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy2)
     obstacles5.push(obstacle5)
   },(6000))
 
   setInterval(() => {
-    const obstacle6 = new Obstacles(canvas.width, Math.floor(Math.random() * (canvas.height - 70)), 70, 70,"blue", "hard", enemy3)
+    const obstacle6 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy3)
     obstacles6.push(obstacle6)
   },(1000))
+
+  setInterval(() => {
+    const obstacle1 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy1)
+    obstacles1.push(obstacle1)
+  },(5000))
+
+  setInterval(() => {
+    const obstacle5 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy2)
+    obstacles5.push(obstacle5)
+  },(10000))
+
+  setInterval(() => {
+    const obstacle6 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy3)
+    obstacles6.push(obstacle6)
+  },(15000))
 
     document.addEventListener("keydown", (spacebar) => {
     
@@ -283,8 +330,9 @@ class Obstacles {
   function chillmode() {
     ctx.clearRect(0,0,canvas.width, canvas.height)
     drawScore()
-    if(score >= 500){
+    if(score >= 100){
       happyTime()
+      winn.play()
       return
      }
      
@@ -297,7 +345,8 @@ class Obstacles {
         oldPers.h += 0.05
         oldPers.w += 0.05
         oldPers.y -= 0.05
-        score += 0.4
+        score += 0.3
+        yum.play()
       }}
     })
     obstacles3.forEach(obstacle3 => {
@@ -308,7 +357,8 @@ class Obstacles {
       oldPers.h -= 0.01
       oldPers.w -= 0.01
       oldPers.y += 0.01
-      score -= 0.3
+      score -= 0.6
+      wrongfruit.play()
     }}
   })
 
@@ -320,7 +370,8 @@ class Obstacles {
       oldPers.h -= 0.01
       oldPers.w -= 0.01
       oldPers.y += 0.01
-      score -= 0.3
+      score -= 0.6
+      wrongfruit.play()
     }}
   })
 
@@ -333,7 +384,9 @@ class Obstacles {
     oldPers.h -= 0.01
     oldPers.w -= 0.01
     oldPers.y += 0.01
-    score -= 0.3
+    score -= 0.6
+    wrongfruit.play()
+
   }}
 })
 
@@ -343,6 +396,7 @@ class Obstacles {
 
     if(score < 0){
       drawGameOver()
+      lose.play()
       return
     }
     requestAnimationFrame(chillmode)
@@ -371,14 +425,29 @@ class Obstacles {
     },(1700))
 
     setInterval(() => {
-      const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 65, 65,"red", "easy", fruit2)
+      const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 100, 100,"red", "easy", fruit2)
       obstacles4.push(obstacle4)
     },(1600))
 
     setInterval(() => {
-      const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 65, 65,"red", "easy", fruit3)
+      const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 100, 100,"red", "easy", fruit3)
       obstacles4.push(obstacle4)
     },(1400))
+
+    setInterval(() => {
+      const obstacle3 = new Obstacles( Math.floor(Math.random() * (canvas.width -50)), 0, 80, 80,"red", "easy", fruit1)
+      obstacles3.push(obstacle3)
+    },(10000))
+
+    setInterval(() => {
+      const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 100, 100,"red", "easy", fruit2)
+      obstacles4.push(obstacle4)
+    },(11000))
+
+    setInterval(() => {
+      const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 100, 100,"red", "easy", fruit3)
+      obstacles4.push(obstacle4)
+    },(12000))
 
     document.addEventListener("keydown", (rightArrow) => {
       if(rightArrow.keyCode === 39){    
@@ -396,5 +465,3 @@ class Obstacles {
 
      
   }
-  
-  
