@@ -143,7 +143,7 @@ class Obstacles {
     }
 
     obstacleMovesLeft(){
-        this.y += 2
+        this.y += 5
     }
   
     conditionMovesDown(){
@@ -205,7 +205,7 @@ class Obstacles {
     if (gameStatus === "finished") {
       drawGameOver()
       ctx.font = "bold 40px Courier New";
-      ctx.fillText(`SCORE:${score}`, ((canvas.width / 2)+305), 300);
+      ctx.fillText(`SCORE:${score}`, ((canvas.width / 2)+305), 350);
       return
       
     }
@@ -292,27 +292,27 @@ class Obstacles {
   },(3000))
 
   setInterval(() => {
-    const obstacle5 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy2)
+    const obstacle5 = new Obstacles(canvas.width, Math.floor(Math.random() * 520), 70, 70,"blue", "hard", enemy2)
     obstacles5.push(obstacle5)
   },(6000))
 
   setInterval(() => {
-    const obstacle6 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy3)
+    const obstacle6 = new Obstacles(canvas.width, Math.floor(Math.random() * 520), 70, 70,"blue", "hard", enemy3)
     obstacles6.push(obstacle6)
   },(1000))
 
   setInterval(() => {
-    const obstacle1 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy1)
+    const obstacle1 = new Obstacles(canvas.width, Math.floor(Math.random() * 520), 70, 70,"blue", "hard", enemy1)
     obstacles1.push(obstacle1)
   },(5000))
 
   setInterval(() => {
-    const obstacle5 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy2)
+    const obstacle5 = new Obstacles(canvas.width, Math.floor(Math.random() * 520), 70, 70,"blue", "hard", enemy2)
     obstacles5.push(obstacle5)
   },(10000))
 
   setInterval(() => {
-    const obstacle6 = new Obstacles(canvas.width, Math.floor(Math.random() * 480), 70, 70,"blue", "hard", enemy3)
+    const obstacle6 = new Obstacles(canvas.width, Math.floor(Math.random() * 520), 70, 70,"blue", "hard", enemy3)
     obstacles6.push(obstacle6)
   },(15000))
 
@@ -418,36 +418,56 @@ class Obstacles {
       const obstacle2 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 60, 60,"blue", "easy", food1)
       obstacles2.push(obstacle2)
     },(1500))
+
+    setInterval(() => {
+      const obstacle2 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 60, 60,"blue", "easy", food1)
+      obstacles2.push(obstacle2)
+    },(1300))
     
     setInterval(() => {
       const obstacle3 = new Obstacles( Math.floor(Math.random() * (canvas.width -50)), 0, 80, 80,"red", "easy", fruit1)
       obstacles3.push(obstacle3)
-    },(1700))
+    },(1000))
 
     setInterval(() => {
       const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 100, 100,"red", "easy", fruit2)
       obstacles4.push(obstacle4)
-    },(1600))
+    },(1100))
 
     setInterval(() => {
       const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 100, 100,"red", "easy", fruit3)
       obstacles4.push(obstacle4)
-    },(1400))
+    },(1200))
 
     setInterval(() => {
       const obstacle3 = new Obstacles( Math.floor(Math.random() * (canvas.width -50)), 0, 80, 80,"red", "easy", fruit1)
       obstacles3.push(obstacle3)
-    },(10000))
+    },(1100))
 
     setInterval(() => {
       const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 100, 100,"red", "easy", fruit2)
       obstacles4.push(obstacle4)
-    },(11000))
+    },(1200))
 
     setInterval(() => {
       const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 100, 100,"red", "easy", fruit3)
       obstacles4.push(obstacle4)
-    },(12000))
+    },(1100))
+
+    setInterval(() => {
+      const obstacle3 = new Obstacles( Math.floor(Math.random() * (canvas.width -50)), 0, 80, 80,"red", "easy", fruit1)
+      obstacles3.push(obstacle3)
+    },(1200))
+
+    setInterval(() => {
+      const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 100, 100,"red", "easy", fruit2)
+      obstacles4.push(obstacle4)
+    },(1000))
+
+    setInterval(() => {
+      const obstacle4 = new Obstacles( Math.floor(Math.random() * (canvas.width - 50)), 0, 100, 100,"red", "easy", fruit3)
+      obstacles4.push(obstacle4)
+    },(1100))
 
     document.addEventListener("keydown", (rightArrow) => {
       if(rightArrow.keyCode === 39){    

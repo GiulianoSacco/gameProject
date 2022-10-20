@@ -6,17 +6,17 @@ body{
 #buttoni {
     z-index: 10;
     position: absolute;
-    left: 680px;
-    top: 240px;
+    left: 670px;
+    top: 290px;
     background-color: #c8c453;
-    border-radius: 60px;
-    height: 130px;
-    width: 130px;
+    border-radius: 20px;
+    height: 140px;
+    width: 140px;
     color: rgb(155, 140, 4);
-    font-size: 30px;
+    font-size: 45px;
     font-family: "Courier New", monospace;
     font-weight: bold;
-    box-shadow: 0px 0px 7px 7px rgb(155, 140, 4);
+    box-shadow: 0px 0px 50px 50px #c8c453;
     border: none
   }
 #canvas {
@@ -32,8 +32,8 @@ body{
 #buttonbeast{
   z-index: 10;
   position: absolute;
-  left: 520px;
-  top: 270px;
+  left: 500px;
+  top: 300px;
   background-color:  #c8c453;
   border-radius: 60px;
   height: 150px;
@@ -49,7 +49,7 @@ body{
   z-index: 10;
   position: absolute;
   left: 880px;
-  top: 270px;
+  top: 300px;
   background-color: #c8c453;
   border-radius: 60px;
   height: 150px;
@@ -66,7 +66,7 @@ body{
   z-index: 10;
   position: absolute;
   left: 200px;
-  top: 200px;
+  top: 230px;
   width: 200px;
   height: 200px;
 }
@@ -75,7 +75,7 @@ body{
   z-index: 10;
   position: absolute;
   left: 160px;
-  top: 380px;
+  top: 410px;
   font-size: 20px;
   font-family: "Courier New", monospace;
   width: 300px;
@@ -93,7 +93,7 @@ body{
   z-index: 10;
   position: absolute;
   left: 1130px;
-  top: 180px;
+  top: 210px;
   width: 200px;
   height: 200px;
 }
@@ -102,7 +102,7 @@ body{
   z-index: 10;
   position: absolute;
   left: 1100px;
-  top: 360px;
+  top: 390px;
   font-size: 20px;
   font-family: "Courier New", monospace;
   width: 300px;
@@ -114,7 +114,7 @@ body{
   z-index: 10;
   position: absolute;
   left: 1100px;
-  top: 460px;
+  top: 490px;
   font-size: 15px;
   font-family: "Courier New", monospace;
   width: 300px;
@@ -126,7 +126,7 @@ body{
   z-index: 10;
   position: absolute;
   left: 680px;
-  top: 300px;
+  top: 360px;
   background-color: #c8c453;
   border-radius: 80px;
   height: 150px;
